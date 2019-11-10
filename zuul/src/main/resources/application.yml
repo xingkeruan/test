@@ -1,0 +1,36 @@
+server:
+  port: 9999
+
+spring:
+  application:
+    name: zuul-app
+
+zuul:
+  routes:
+    testabc:
+      serviceId: test
+      path: /testabc/**
+    api-user:
+      path: /api-account/**
+      serviceId: eshop-account
+      url: http://localhost:8081/
+    api-product:
+      path: /api-product/**
+      serviceId: eshop-product
+      url: http://localhost:8082/
+    api-order:
+      path: /api-order/**
+      serviceId: eshop-order
+      url: http://localhost:8083/
+
+api:
+  key: secret
+#  ignored-services: "*"
+#  prefix: /eshop
+
+router:
+  auth:
+    url: http://localhost:8888
+
+exclude-routes:
+  urls: http://localhost:9999/api-account/login,http://localhost:9999/api-account/addUser
